@@ -9,10 +9,13 @@ LINUX_ROOT=${SDK_ROOT}/linux
 LINUX_BIN=${LINUX_ROOT}/arch/riscv/boot/Image
 OPENSBI_ELF=${OPENSBI_ROOT}/build/platform/generic/firmware/fw_payload.elf
 
+############################################
+# You need to modify the following path according to your own environment
+# RV64EMU
 RV64EMU=/home/leesum/workhome/riscv64-emu
 # CROSS_COMPILE
 CROSS_COMPILE=/opt/riscv-linux/bin/riscv64-unknown-linux-gnu-
-
+############################################
 
 # Build Linux
 cp rv64emu_linux_defconfig ${LINUX_ROOT}/arch/riscv/configs/
