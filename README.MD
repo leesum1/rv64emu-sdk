@@ -1,11 +1,16 @@
-# rv64emu-sdk
+# RV64emu-sdk
+This is a sdk for [rv64emu](https://github.com/leesum1/RV64emu-rs), which contains busybox, linux kernel and opensbi.
 
 ![run_linux](https://cdn.jsdelivr.net/gh/leesum1/doc/img/leesum1.gif)
 
+## Get source code
+Because the linux kernel is to big, so use `--depth 1` to clone the source code.
+```shell
+git submodule update --init --depth 1
+```
 
 ## How to build busybox
 > refer to [busybox](https://busybox.net)
-
 
 Actrually, you can use the busybox binary in `rootfs` directory directly.Which is built with CFLAG `CFLAGS += -march=rv64imac -mabi=lp64`.
 
