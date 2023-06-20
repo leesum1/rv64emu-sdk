@@ -1,0 +1,10 @@
+#!/bin/sh
+
+echo "Hello Embedded World!"
+echo "Hello RISC-V World!"
+mkdir /proc
+mkdir /sys
+mount -t proc none /proc
+mount -t sysfs none /sys
+/sbin/mdev -s
+
