@@ -4,16 +4,18 @@
 	#address-cells = <0x2>;
 	#size-cells = <0x2>;
 	compatible = "riscv-virtio";
-	model = "riscv-virtio,qemu";
+	model = "rv64-emu-rs";
 
 	aliases {
 		serial0 = &uart0;
 	};
 	chosen {
-		bootargs = "console=hvc0 earlycon=sbi";
-		// bootargs = "earlycon console=ttySIF0";
-		// bootargs = "console=ttyS0";
-		stdout-path = "serial0:115200n8"; // chose a system console
+		// use sbicall (getchar and putchar) as console
+		//   bootargs = "console=hvc0 earlycon=sbi";
+		// use sifive uart as console (enable)
+		   bootargs = "earlycon console=ttySIF0";
+		
+		 stdout-path = "serial0:115200n8"; // chose a system console
 	};
 
 	my_clk: clock {
@@ -41,7 +43,7 @@
 			reg = <0x00>;
 			status = "okay";
 			compatible = "riscv";
-			riscv,isa = "rv64ima";
+			riscv,isa = "rv64imac";
 			mmu-type = "riscv,sv39"; // sv39
       		clock-frequency = <1000000000>;
 
@@ -61,7 +63,7 @@
 
 	memory@80000000 {
 		device_type = "memory";
-		reg = <0x0 0x80000000 0x0 0x8000000>;
+		reg = <0x0 0x80000000 0x0 0x800000>;
 	};
 
 	soc {

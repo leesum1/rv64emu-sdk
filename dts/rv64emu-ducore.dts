@@ -43,7 +43,7 @@
 			reg = <0x00>;
 			status = "okay";
 			compatible = "riscv";
-			riscv,isa = "rv64ima";
+			riscv,isa = "rv64imac";
 			mmu-type = "riscv,sv39"; // sv39
       		clock-frequency = <1000000000>;
 
