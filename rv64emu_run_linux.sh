@@ -8,6 +8,7 @@ LINUX_ROOT=${SDK_ROOT}/linux
 # IMAGE PATH
 LINUX_BIN=${LINUX_ROOT}/arch/riscv/boot/Image
 OPENSBI_ELF=${OPENSBI_ROOT}/build/platform/generic/firmware/fw_payload.elf
+DTS_FILE=${SDK_ROOT}/dts/rv64emu-signal
 
 ############################################
 # You need to modify the following path according to your own environment
@@ -23,17 +24,16 @@ make -C ${LINUX_ROOT} ARCH=riscv CROSS_COMPILE=${CROSS_COMPILE} rv64emu_linux_de
 make -C ${LINUX_ROOT} ARCH=riscv CROSS_COMPILE=${CROSS_COMPILE} -j$(nproc)
 
 # Build dts
-dtc -I dts  -O dtb dts/rv64emu-signal.dts -o dts/rv64emu-signal.dtb
+dtc -I dts -O dtb ${DTS_FILE}.dts -o ${DTS_FILE}.dtb
 # Build opensbi with linux payload
 cd ${OPENSBI_ROOT}
 make clean
 make PLATFORM=generic \
      CROSS_COMPILE=$CROSS_COMPILE \
      FW_PAYLOAD_PATH=$LINUX_BIN \
-     FW_FDT_PATH=$SDK_ROOT/dts/rv64emu-signal.dtb -j$(nproc)
+     FW_FDT_PATH=${DTS_FILE}.dtb -j$(nproc)
 
 # Run rv64emu
 cd $RV64EMU
-cargo run --release  -- \
-	  --img ${OPENSBI_ELF} \
-	  --num-harts 1 
+cargo run --release --example=linux_system -- --img ${OPENSBI_ELF} \
+     --num-harts 1

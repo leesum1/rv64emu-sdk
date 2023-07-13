@@ -6,7 +6,7 @@
   compatible = "ucbbar,spike-bare-dev";
   model = "ucbbar,spike-bare";
   chosen {
-    bootargs = "root=/dev/ram console=hvc0 earlycon=sbi";
+    bootargs = "console=hvc0 earlycon=sbi";
     // bootargs = "console=ttyS0";
 
   };
@@ -19,7 +19,7 @@
       reg = <0>;
       status = "okay";
       compatible = "riscv";
-      riscv,isa = "rv64ima";
+      riscv,isa = "rv64imac";
       mmu-type = "riscv,sv48";
       riscv,pmpregions = <16>;
       riscv,pmpgranularity = <4>;
