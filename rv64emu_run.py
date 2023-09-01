@@ -7,11 +7,13 @@ OPENSBI_ROOT = os.path.join(SDK_ROOT, "opensbi")
 BUSYBOX_ROOT = os.path.join(SDK_ROOT, "busybox-1_36_stable")
 LINUX_ROOT = os.path.join(SDK_ROOT, "linux")
 # IMAGE PATH
+LINUX_CONFIG = os.path.join(SDK_ROOT, "rv64emu_linux_empty_rootfs_defconfig")
+
 LINUX_BIN = os.path.join(LINUX_ROOT, "arch", "riscv", "boot", "Image")
 OPENSBI_ELF = os.path.join(
     OPENSBI_ROOT, "build", "platform", "generic", "firmware", "fw_payload.elf"
 )
-DTS_FILE = os.path.join(SDK_ROOT, "dts", "rv64emu-signal-8m")
+DTS_FILE = os.path.join(SDK_ROOT, "dts", "rv64emu-signal-128m")
 
 ############################################
 # You need to modify the following path according to your own environment
@@ -25,7 +27,7 @@ CROSS_COMPILE = "/opt/riscv-linux/bin/riscv64-unknown-linux-gnu-"
 subprocess.run(
     [
         "cp",
-        "rv64emu_linux_defconfig",
+        LINUX_CONFIG,
         os.path.join(LINUX_ROOT, "arch", "riscv", "configs"),
     ]
 )
@@ -36,7 +38,7 @@ subprocess.run(
         LINUX_ROOT,
         "ARCH=riscv",
         f"CROSS_COMPILE={CROSS_COMPILE}",
-        "rv64emu_linux_defconfig",
+        LINUX_CONFIG.split("/")[-1],
     ]
 )
 subprocess.run(

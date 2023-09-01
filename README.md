@@ -4,7 +4,7 @@ This is a sdk for [rv64emu](https://github.com/leesum1/RV64emu-rs), which contai
 ![run_linux](https://cdn.jsdelivr.net/gh/leesum1/doc/img/leesum1.gif)
 
 ## Get source code
-Because the linux kernel is to big, so use `--depth 1` to clone the source code.
+Because the linux kernel is **TOO LARGE!!!!!**, so use `--depth 1` to clone the source code.
 ```shell
 git submodule update --init --depth 1
 ```
